@@ -10,9 +10,17 @@ backed by PostgreSQL. Built as basic hands-on practice with both stacks.
 
 PostgreSQL 15 runs in Docker and is shared by both (host port **5433**).
 
-## Run everything
+## Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (includes Docker Compose)
+
+No local Java or PHP toolchain needed — everything builds and runs in containers.
+
+## Getting started
 
 ```bash
+git clone https://github.com/quydinhh/spring-laravel-crud.git
+cd spring-laravel-crud
 docker compose up -d --build
 ```
 
