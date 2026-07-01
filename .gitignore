@@ -1,0 +1,15 @@
+# Spring Boot
+product-crud/target/
+
+# Laravel
+product-crud-laravel/vendor/
+product-crud-laravel/node_modules/
+product-crud-laravel/.env
+product-crud-laravel/storage/*.key
+product-crud-laravel/database/database.sqlite
+
+# IDE / OS
+.idea/
+*.iml
+.vscode/
+.DS_Store

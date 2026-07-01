@@ -1,0 +1,68 @@
+### Product CRUD demo — REST calls for both stacks
+### VS Code "REST Client" or JetBrains HTTP Client can run these directly.
+
+@spring = http://localhost:8080/api/products
+@laravel = http://localhost:8000/api/products
+
+################## SPRING BOOT (port 8080) ##################
+
+### List all
+GET {{spring}}
+
+### Create
+POST {{spring}}
+Content-Type: application/json
+
+{ "name": "Keyboard", "price": 29.99 }
+
+### Get one (change id)
+GET {{spring}}/1
+
+### Update
+PUT {{spring}}/1
+Content-Type: application/json
+
+{ "name": "Mechanical Keyboard", "price": 49.90 }
+
+### Validation error (price must be positive)
+POST {{spring}}
+Content-Type: application/json
+
+{ "name": "", "price": -5 }
+
+### Delete
+DELETE {{spring}}/1
+
+
+################## LARAVEL (port 8000) ##################
+
+### List all
+GET {{laravel}}
+
+### Create
+POST {{laravel}}
+Content-Type: application/json
+Accept: application/json
+
+{ "name": "Mouse", "price": 19.99 }
+
+### Get one (change id)
+GET {{laravel}}/1
+
+### Update
+PUT {{laravel}}/1
+Content-Type: application/json
+Accept: application/json
+
+{ "name": "Wireless Mouse", "price": 24.50 }
+
+### Validation error
+POST {{laravel}}
+Content-Type: application/json
+Accept: application/json
+
+{ "name": "", "price": -5 }
+
+### Delete
+DELETE {{laravel}}/1
+Accept: application/json

@@ -1,0 +1,44 @@
+services:
+  db:
+    image: postgres:15
+    container_name: crud-demo-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: crud_demo
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d
+    ports:
+      # Host 5433 to avoid clashing with any Postgres already on 5432.
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d crud_demo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  spring:
+    build: ./product-crud
+    container_name: crud-demo-spring
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/crud_demo
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  laravel:
+    build: ./product-crud-laravel
+    container_name: crud-demo-laravel
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
